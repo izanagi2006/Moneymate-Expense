@@ -13,12 +13,11 @@ const $ = id => document.getElementById(id);
 /* =========================================================
    SUPABASE CONNECTION
 ========================================================= */
-
 const SUPABASE_URL =
-    "https://fydgoyvkubqvwhbmozjf.supabase.co";
+    "https://fwmlldtmvtxmywetwgve.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_9mpDWGiMSRlaNFJEJYzN4w__7rtAxHr";
+    "YOUR_NEW_PUBLISHABLE_KEY";
 
 const supabaseClient =
     window.supabase.createClient(
