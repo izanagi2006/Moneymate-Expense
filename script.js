@@ -1639,7 +1639,59 @@ function calculateTotals() {
     };
 
 }
+/* =========================================================
+   RUNNING BALANCE + TRANSACTION DATE/TIME
+========================================================= */
 
+function getTransactionBalances(startingBalance = 0) {
+    let balance = Number(startingBalance) || 0;
+
+    const chronological = [...transactions].sort((a, b) => {
+        const timeA = new Date(a.date).getTime() || 0;
+        const timeB = new Date(b.date).getTime() || 0;
+
+        if (timeA !== timeB) return timeA - timeB;
+
+        return String(a.id).localeCompare(String(b.id));
+    });
+
+    const balances = {};
+
+    chronological.forEach(transaction => {
+        const before = balance;
+        const amount = Number(transaction.amount) || 0;
+
+        if (transaction.type === "income") {
+            balance += amount;
+        } else {
+            balance -= amount;
+        }
+
+        balances[transaction.id] = {
+            before,
+            after: balance
+        };
+    });
+
+    return balances;
+}
+
+function formatTransactionDateTime(value) {
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return "Date/time unavailable";
+    }
+
+    return date.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+    });
+}
 
 /* =========================================================
    MONTHLY EXPENSE
