@@ -1840,109 +1840,67 @@ function renderSummary() {
    TRANSACTION HTML
 ========================================================= */
 
-function transactionHTML(
-    transaction
-) {
+function transactionHTML(transaction) {
+    const sign = transaction.type === "expense" ? "−" : "+";
 
-    const sign =
-        transaction.type ===
-        "expense"
-            ? "−"
-            : "+";
+    const balances = getTransactionBalances();
+    const transactionBalance = balances[transaction.id];
 
+    const balanceBefore = transactionBalance
+        ? transactionBalance.before
+        : 0;
+
+    const balanceAfter = transactionBalance
+        ? transactionBalance.after
+        : 0;
 
     return `
-
         <div class="transaction-row">
 
-            <div
-                class="tx-icon
-                ${
-                    transaction.type ===
-                    "income"
-                        ? "income"
-                        : ""
-                }"
-            >
-                ${
-                    transaction.type ===
-                    "income"
-                        ? "↗"
-                        : "↘"
-                }
+            <div class="tx-icon ${transaction.type === "income" ? "income" : ""}">
+                ${transaction.type === "income" ? "↗" : "↘"}
             </div>
 
-
             <div>
-
                 <div class="tx-name">
-                    ${escapeHTML(
-                        transaction.name
-                    )}
+                    ${escapeHTML(transaction.name)}
                 </div>
 
                 <div class="tx-meta">
-
-                    ${escapeHTML(
-                        transaction.category
-                    )}
-
+                    ${escapeHTML(transaction.category)}
                     ·
-
-                    ${escapeHTML(
-                        transaction.paymentMethod ||
-                        "Other"
-                    )}
-
+                    ${escapeHTML(transaction.paymentMethod || "Other")}
                     ${
                         transaction.note
-                            ? `
-                                ·
-                                ${escapeHTML(
-                                    transaction.note
-                                )}
-                              `
+                            ? ` · ${escapeHTML(transaction.note)}`
                             : ""
                     }
-
                 </div>
 
-            </div>
+                <div class="tx-meta" style="margin-top:5px;">
+                    📅 ${formatTransactionDateTime(transaction.date)}
+                </div>
 
+                <div class="tx-meta" style="margin-top:3px;">
+                    💰 Before: ${money(balanceBefore)}
+                    &nbsp;→&nbsp;
+                    Left: ${money(balanceAfter)}
+                </div>
+            </div>
 
             <div class="tx-date">
-
-                ${formatShortDate(
-                    transaction.date
-                )}
-
+                ${formatShortDate(transaction.date)}
             </div>
-
 
             <div class="tx-method">
-
-                ${escapeHTML(
-                    transaction.paymentMethod ||
-                    ""
-                )}
-
+                ${escapeHTML(transaction.paymentMethod || "")}
             </div>
 
-
-            <div
-                class="tx-amount
-                ${transaction.type}"
-            >
-
-                ${sign}${money(
-                    transaction.amount
-                )}
-
+            <div class="tx-amount ${transaction.type}">
+                ${sign}${money(transaction.amount)}
             </div>
-
 
             <div class="tx-actions">
-
                 <button
                     class="icon-button"
                     title="Edit"
@@ -1951,7 +1909,6 @@ function transactionHTML(
                     ✎
                 </button>
 
-
                 <button
                     class="icon-button"
                     title="Delete"
@@ -1959,13 +1916,10 @@ function transactionHTML(
                 >
                     ×
                 </button>
-
             </div>
 
         </div>
-
     `;
-
 }
 
 
