@@ -3115,3 +3115,28 @@ textarea {
         font-size: 15px;
     }
 }
+.login-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid #303442;
+    border-radius: 10px;
+    background: #11141c;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.login-close-btn:hover {
+    background: #303442;
+}
+
+#loginScreen {
+    position: relative;
+}
