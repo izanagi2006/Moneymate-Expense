@@ -1861,30 +1861,19 @@ function transactionHTML(transaction) {
                 ${transaction.type === "income" ? "↗" : "↘"}
             </div>
 
-            <div>
+            <div class="tx-details">
                 <div class="tx-name">
                     ${escapeHTML(transaction.name)}
                 </div>
 
                 <div class="tx-meta">
                     ${escapeHTML(transaction.category)}
-                    ·
-                    ${escapeHTML(transaction.paymentMethod || "Other")}
-                    ${
-                        transaction.note
-                            ? ` · ${escapeHTML(transaction.note)}`
-                            : ""
-                    }
-                </div>
-
-                <div class="tx-meta" style="margin-top:5px;">
-                    📅 ${formatTransactionDateTime(transaction.date)}
-                </div>
-
-                <div class="tx-meta" style="margin-top:3px;">
-                    💰 Before: ${money(balanceBefore)}
-                    &nbsp;→&nbsp;
-                    Left: ${money(balanceAfter)}
+                    ${transaction.paymentMethod
+                        ? ` · ${escapeHTML(transaction.paymentMethod)}`
+                        : ""}
+                    ${transaction.note
+                        ? ` · ${escapeHTML(transaction.note)}`
+                        : ""}
                 </div>
             </div>
 
@@ -1896,32 +1885,34 @@ function transactionHTML(transaction) {
                 ${escapeHTML(transaction.paymentMethod || "")}
             </div>
 
-            <div class="tx-amount ${transaction.type}">
-                ${sign}${money(transaction.amount)}
+            <div class="tx-right-details">
+                <div class="tx-full-datetime">
+                    📅 ${formatTransactionDateTime(transaction.date)}
+                </div>
+
+                <div class="tx-amount ${transaction.type}">
+                    ${sign}${money(transaction.amount)}
+                </div>
+
+                <div class="tx-balance-details">
+                    💰 Before: ${money(balanceBefore)}
+                    → Left: ${money(balanceAfter)}
+                </div>
             </div>
 
             <div class="tx-actions">
-                <button
-                    class="icon-button"
+                <button class="icon-button"
                     title="Edit"
-                    onclick="openModal('${transaction.id}')"
-                >
-                    ✎
-                </button>
+                    onclick="openModal('${transaction.id}')">✎</button>
 
-                <button
-                    class="icon-button"
+                <button class="icon-button"
                     title="Delete"
-                    onclick="deleteTransaction('${transaction.id}')"
-                >
-                    ×
-                </button>
+                    onclick="deleteTransaction('${transaction.id}')">×</button>
             </div>
 
         </div>
     `;
 }
-
 
 /* =========================================================
    RECENT TRANSACTIONS
