@@ -1877,27 +1877,27 @@ function transactionHTML(transaction) {
                 </div>
             </div>
 
-            <div class="tx-date">
-                ${formatShortDate(transaction.date)}
-            </div>
-
-            <div class="tx-method">
-                ${escapeHTML(transaction.paymentMethod || "")}
-            </div>
-
             <div class="tx-right-details">
-                <div class="tx-full-datetime">
-                    📅 ${formatTransactionDateTime(transaction.date)}
-                </div>
 
-                <div class="tx-amount ${transaction.type}">
-                    ${sign}${money(transaction.amount)}
+                <div class="tx-right-top">
+                    <span class="tx-full-datetime">
+                        📅 ${formatTransactionDateTime(transaction.date)}
+                    </span>
+
+                    <span class="tx-method">
+                        ${escapeHTML(transaction.paymentMethod || "")}
+                    </span>
+
+                    <span class="tx-amount ${transaction.type}">
+                        ${sign}${money(transaction.amount)}
+                    </span>
                 </div>
 
                 <div class="tx-balance-details">
                     💰 Before: ${money(balanceBefore)}
                     → Left: ${money(balanceAfter)}
                 </div>
+
             </div>
 
             <div class="tx-actions">
@@ -1913,6 +1913,7 @@ function transactionHTML(transaction) {
         </div>
     `;
 }
+
 
 /* =========================================================
    RECENT TRANSACTIONS
