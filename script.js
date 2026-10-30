@@ -5637,3 +5637,30 @@ window.addEventListener("load", () => {
 ========================================================= */
 
 testSupabaseConnection();
+function closeMoneyMateLogin(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    // Find the login card containing the close button.
+    const button = event?.currentTarget;
+    const card = button?.closest(".modal-card");
+
+    if (!card) {
+        console.error("MoneyMate login card not found.");
+        return;
+    }
+
+    // Hide the card and its associated backdrop.
+    card.style.display = "none";
+
+    const backdrop = card.previousElementSibling;
+
+    if (backdrop?.classList.contains("modal-backdrop")) {
+        backdrop.style.display = "none";
+    }
+
+    // Allow the user to continue without logging in.
+    document.body.classList.remove("modal-open");
+}
