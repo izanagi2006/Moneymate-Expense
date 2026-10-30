@@ -3045,3 +3045,73 @@ textarea {
         font-size: 14px;
     }
 }
+/* MoneyMate transaction layout improvements */
+
+.tx-right-details {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.tx-right-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: nowrap;
+}
+
+.tx-full-datetime {
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.tx-method {
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.tx-amount {
+    font-size: 16px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.tx-balance-details {
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* Give each transaction a little more breathing room */
+.transaction-row {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    column-gap: 14px;
+}
+
+/* Keep transaction actions aligned neatly */
+.tx-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Adapt the layout to narrow screens */
+@media (max-width: 700px) {
+    .tx-right-top {
+        flex-wrap: wrap;
+        gap: 5px 8px;
+    }
+
+    .tx-full-datetime,
+    .tx-balance-details {
+        font-size: 12px;
+    }
+
+    .tx-amount {
+        font-size: 15px;
+    }
+}
